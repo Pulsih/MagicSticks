@@ -1,0 +1,32 @@
+################################################################
+#                                                              #
+#                      ] MagicSticks [                         #
+#                                                              #
+#                 Plugin created by Pulsi_                     #
+#                For help join my discord!                     #
+#              https://discord.gg/XMtFZvwXZG                   #
+#                                                              #
+################################################################
+
+#Recive update messages if available
+# Default: true
+update_checker: true
+
+#Use or not the Experience for Shoot or Use Powers
+# Default: true
+automatic_regeneration_for_mana: true
+
+#The delay for the Mana regeneration (in Ticks -> 20 = 1 Second)
+# Default: 20
+# YOU MAY NEED TO RESTART TO UPDATE THIS CHANGE
+manaregeneration_delay: 20
+
+#The max amount of mana which a player can have
+# Default: 20
+# YOU MAY NEED TO RESTART TO UPDATE THIS CHANGE
+maxmana: 20
+
+#The Mana given at every >> manaregeneration_delay <<
+# Default: 1
+# YOU MAY NEED TO RESTART TO UPDATE THIS CHANGE
+mana_given: 1
