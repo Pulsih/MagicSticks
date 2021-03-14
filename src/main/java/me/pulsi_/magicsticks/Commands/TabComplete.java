@@ -1,4 +1,4 @@
-package me.pulsi_.magicsticks.Managers;
+package me.pulsi_.magicsticks.Commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -24,7 +24,7 @@ public class TabComplete implements TabCompleter {
             arguments.add("give");
             arguments.add("reload");
             arguments.add("create");
-            arguments.add("toggle");
+            arguments.add("ammo");
         }
 
         List<String> result = new ArrayList<String>();

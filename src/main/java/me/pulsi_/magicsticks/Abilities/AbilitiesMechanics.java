@@ -1,4 +1,6 @@
 package me.pulsi_.magicsticks.Abilities;
 
-public class AbilitiesMechanics {
+import org.bukkit.event.Listener;
+
+public class AbilitiesMechanics implements Listener {
 }

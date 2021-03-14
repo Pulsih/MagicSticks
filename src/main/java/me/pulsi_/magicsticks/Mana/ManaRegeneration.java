@@ -1,6 +1,6 @@
 package me.pulsi_.magicsticks.Mana;
 
-import me.pulsi_.magicsticks.MagicSticks;
+import me.pulsi_.magicsticks.Main;
 import me.pulsi_.magicsticks.Managers.ConfigManager;
 import me.pulsi_.magicsticks.Managers.Translator;
 import net.md_5.bungee.api.ChatMessageType;
@@ -13,14 +13,15 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class ManaRegeneration implements Listener {
 
-    ConfigManager messages = new ConfigManager(MagicSticks.getInstance(), "messages.yml");
+    ConfigManager messages = new ConfigManager(Main.getInstance(), "messages.yml");
 
-    String delay = MagicSticks.getInstance().getConfig().getString("manaregeneration_delay");
-    String maxMana = MagicSticks.getInstance().getConfig().getString("maxmana");
-    String expGiven = MagicSticks.getInstance().getConfig().getString("mana_given");
+    String delay = Main.getInstance().getConfig().getString("regeneration_delay");
+    String maxMana = Main.getInstance().getConfig().getString("max_mana");
+    String expGiven = Main.getInstance().getConfig().getString("mana_given");
 
     @EventHandler
     public void MoveMana(PlayerJoinEvent e) {
+        if (!Main.getInstance().getConfig().getBoolean("use_mana")) return;
         Player player = e.getPlayer();
         new BukkitRunnable() {
             public void run() {
@@ -33,6 +34,6 @@ public class ManaRegeneration implements Listener {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(fullMana)));
                 }
             }
-        }.runTaskTimer(MagicSticks.getInstance(), 0, Long.parseLong(delay));
+        }.runTaskTimer(Main.getInstance(), 0, Long.parseLong(delay));
     }
 }

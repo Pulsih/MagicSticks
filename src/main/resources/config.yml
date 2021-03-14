@@ -9,24 +9,26 @@
 ################################################################
 
 #Recive update messages if available
-# Default: true
 update_checker: true
 
-#Use or not the Experience for Shoot or Use Powers
-# Default: true
-automatic_regeneration_for_mana: true
+################################################################
+#                          < Mana >                            #
+################################################################
+
+#If you will not choose the Mana, you will have to use < AMMO >
+use_mana: true
 
 #The delay for the Mana regeneration (in Ticks -> 20 = 1 Second)
-# Default: 20
-# YOU MAY NEED TO RESTART TO UPDATE THIS CHANGE
-manaregeneration_delay: 20
+regeneration_delay: 20
 
 #The max amount of mana which a player can have
-# Default: 20
-# YOU MAY NEED TO RESTART TO UPDATE THIS CHANGE
-maxmana: 20
+max_mana: 20
 
-#The Mana given at every >> manaregeneration_delay <<
-# Default: 1
-# YOU MAY NEED TO RESTART TO UPDATE THIS CHANGE
+#The amount given to the player
 mana_given: 1
+
+################################################################
+#                       < Scoreboard >                         #
+################################################################
+
+use_scoreboard: true

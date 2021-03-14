@@ -1,6 +1,6 @@
 package me.pulsi_.magicsticks.Powers;
 
-import me.pulsi_.magicsticks.MagicSticks;
+import me.pulsi_.magicsticks.Main;
 import me.pulsi_.magicsticks.Managers.MessageManager;
 import me.pulsi_.magicsticks.Managers.Translator;
 import net.milkbowl.vault.economy.Economy;
@@ -12,7 +12,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class PowersShopListener implements Listener {
 
-    Economy econ = MagicSticks.getEconomy();
+    Economy econ = Main.getEconomy();
 
     @EventHandler
     public void SelectPower(InventoryClickEvent event) {

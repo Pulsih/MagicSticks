@@ -1,9 +1,11 @@
 package me.pulsi_.magicsticks;
 
 import me.pulsi_.magicsticks.Abilities.AbilitiesShopListener;
+import me.pulsi_.magicsticks.Ammos.AmmoMechanics;
+import me.pulsi_.magicsticks.Commands.Commands;
+import me.pulsi_.magicsticks.Commands.TabComplete;
 import me.pulsi_.magicsticks.Mana.ManaRegeneration;
 import me.pulsi_.magicsticks.Managers.ConfigManager;
-import me.pulsi_.magicsticks.Managers.TabComplete;
 import me.pulsi_.magicsticks.Managers.Translator;
 import me.pulsi_.magicsticks.Powers.PowersEffects;
 import me.pulsi_.magicsticks.Powers.PowersShopListener;
@@ -16,12 +18,12 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
-public final class MagicSticks extends JavaPlugin implements Listener {
+public final class Main extends JavaPlugin implements Listener {
 
-    ConfigManager scoreboardConfig, messagesConfig, sticksConfig, powersConfig, abilitiesConfig, shopConfig, powersShopConfig, abilitiesShopConfig;
+    ConfigManager scoreboardConfig, messagesConfig, sticksConfig, powersConfig, abilitiesConfig, shopConfig, powersShopConfig, abilitiesShopConfig, ammoConfig;
 
-    private static MagicSticks instance;
-    public static MagicSticks getInstance() {
+    private static Main instance;
+    public static Main getInstance() {
         return instance;
     }
 
@@ -33,22 +35,26 @@ public final class MagicSticks extends JavaPlugin implements Listener {
 
         {
             this.scoreboardConfig = new ConfigManager(this, "scoreboard.yml");
+            this.ammoConfig = new ConfigManager(this, "ammo.yml");
             this.messagesConfig = new ConfigManager(this, "messages.yml");
             this.sticksConfig = new ConfigManager(this, "sticks.yml");
             this.powersConfig = new ConfigManager(this, "powers.yml");
             this.abilitiesConfig = new ConfigManager(this, "abilities.yml");
+            this.shopConfig = new ConfigManager(this, "shop.yml");
+            this.abilitiesShopConfig = new ConfigManager(this, "abilities.yml");
+            this.powersShopConfig = new ConfigManager(this, "powers.yml");
         }
 
         this.saveDefaultConfig();
 
         if (!setupEconomy()) {
-            System.out.println(Translator.Colors("&8&m---------------"));
-            System.out.println(Translator.Colors("&c"));
-            System.out.println(Translator.Colors("&cNo economy Plugin Found!"));
-            System.out.println(Translator.Colors("&c"));
-            System.out.println(Translator.Colors("&cDisabling &5Magic&9Sticks&c!"));
-            System.out.println(Translator.Colors("&c"));
-            System.out.println(Translator.Colors("&8&m---------------"));
+            getServer().getConsoleSender().sendMessage(Translator.Colors("&8&m---------------"));
+            getServer().getConsoleSender().sendMessage(Translator.Colors("&c"));
+            getServer().getConsoleSender().sendMessage(Translator.Colors("&cNo economy Plugin Found!"));
+            getServer().getConsoleSender().sendMessage(Translator.Colors("&c"));
+            getServer().getConsoleSender().sendMessage(Translator.Colors("&cDisabling &5Magic&9Sticks&c!"));
+            getServer().getConsoleSender().sendMessage(Translator.Colors("&c"));
+            getServer().getConsoleSender().sendMessage(Translator.Colors("&8&m---------------"));
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -59,6 +65,7 @@ public final class MagicSticks extends JavaPlugin implements Listener {
         getCommand("magicsticks").setExecutor(new Commands());
         getCommand("magicsticks").setTabCompleter(new TabComplete());
         getServer().getPluginManager().registerEvents(new AbilitiesShopListener(), this);
+        getServer().getPluginManager().registerEvents(new AmmoMechanics(), this);
         getServer().getPluginManager().registerEvents(new SticksShopListener(), this);
         getServer().getPluginManager().registerEvents(new SticksEffects(), this);
         getServer().getPluginManager().registerEvents(new ManaRegeneration(), this);
@@ -72,13 +79,13 @@ public final class MagicSticks extends JavaPlugin implements Listener {
         //------------------------------------------------------------------------------------------------
         // The Console message for Start
         getServer().getConsoleSender().sendMessage(Translator.Colors("&8"));
-        getServer().getConsoleSender().sendMessage(Translator.Colors("&8&m---------------"));
+        getServer().getConsoleSender().sendMessage(Translator.Colors("&8&m---------------------"));
         getServer().getConsoleSender().sendMessage(Translator.Colors("&8"));
-        getServer().getConsoleSender().sendMessage(Translator.Colors("  &5Magic&9Sticks"));
+        getServer().getConsoleSender().sendMessage(Translator.Colors("&5Magic&9Sticks"));
         getServer().getConsoleSender().sendMessage(Translator.Colors("&8"));
-        getServer().getConsoleSender().sendMessage(Translator.Colors(" &2Plugin enabled!"));
+        getServer().getConsoleSender().sendMessage(Translator.Colors("&2Plugin enabled! &bv%version%").replace("%version%", ""+this.getDescription().getVersion()));
         getServer().getConsoleSender().sendMessage(Translator.Colors("&8"));
-        getServer().getConsoleSender().sendMessage(Translator.Colors("&8&m---------------"));
+        getServer().getConsoleSender().sendMessage(Translator.Colors("&8&m---------------------"));
         getServer().getConsoleSender().sendMessage(Translator.Colors("&8"));
         // The Console message for Start
         //------------------------------------------------------------------------------------------------

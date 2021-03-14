@@ -1,8 +1,8 @@
 name: MagicSticks
 version: @version@
-main: me.pulsi_.magicsticks.MagicSticks
+main: me.pulsi_.magicsticks.Main
 api-version: 1.13
-prefix: MagicSticks
+prefix: < MagicSticks >
 load: POSTWORLD
 authors: [ Pulsi_ ]
 description: The funniest plugin of Spigot!

@@ -1,6 +1,7 @@
 package me.pulsi_.magicsticks.Powers;
 
-import me.pulsi_.magicsticks.MagicSticks;
+import me.pulsi_.magicsticks.Main;
+import me.pulsi_.magicsticks.Managers.ConfigManager;
 import me.pulsi_.magicsticks.Managers.MessageManager;
 import me.pulsi_.magicsticks.Managers.Translator;
 import net.md_5.bungee.api.ChatMessageType;
@@ -24,6 +25,8 @@ public class PowersEffects implements Listener {
 
     Map<UUID, Long> cooldown = new HashMap<>();
 
+    ConfigManager messages = new ConfigManager(Main.getInstance(), "messages.yml");
+
     @EventHandler
     public void Powers(PlayerInteractEvent e) {
         Player player = e.getPlayer();
@@ -40,7 +43,7 @@ public class PowersEffects implements Listener {
             this.cooldown.put(player.getUniqueId(), System.currentTimeMillis() + (5 * 60 * 1000));
 
         } else {
-            String messageCooldown = MagicSticks.getInstance().getConfig().getString("cooldown_message");
+            String messageCooldown = messages.getConfig().getString("cooldown_message");
             long timeleft = (this.cooldown.get(player.getUniqueId()) - System.currentTimeMillis());
             player.sendMessage(Translator.Colors(messageCooldown.replace("%timeleft%", (timeleft / 1000) + "")));
             return;
@@ -59,7 +62,7 @@ public class PowersEffects implements Listener {
                 player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_AMBIENT, 5, 1);
                 message.powerActivated();
             } else {
-                String noMana = MagicSticks.getInstance().getConfig().getString("insufficient_mana_message");
+                String noMana = messages.getConfig().getString("insufficient_mana_message");
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
             }
             // Striker Power
@@ -79,7 +82,7 @@ public class PowersEffects implements Listener {
 
                 message.powerActivated();
             } else {
-                String noMana = MagicSticks.getInstance().getConfig().getString("insufficient_mana_message");
+                String noMana = Main.getInstance().getConfig().getString("insufficient_mana_message");
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
             }
             // Tank Power
@@ -99,7 +102,7 @@ public class PowersEffects implements Listener {
                 player.playSound(player.getLocation(), Sound.ENTITY_SILVERFISH_AMBIENT, 15, 1);
                 message.powerActivated();
             } else {
-                String noMana = MagicSticks.getInstance().getConfig().getString("insufficient_mana_message");
+                String noMana = Main.getInstance().getConfig().getString("insufficient_mana_message");
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
             }
         }

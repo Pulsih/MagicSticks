@@ -1,6 +1,7 @@
 package me.pulsi_.magicsticks.Sticks;
 
-import me.pulsi_.magicsticks.MagicSticks;
+import me.pulsi_.magicsticks.Main;
+import me.pulsi_.magicsticks.Managers.ConfigManager;
 import me.pulsi_.magicsticks.Managers.MessageManager;
 import me.pulsi_.magicsticks.Managers.Translator;
 import net.milkbowl.vault.economy.Economy;
@@ -12,24 +13,27 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class SticksShopListener implements Listener {
 
-    Economy econ = MagicSticks.getEconomy();
+    ConfigManager configSticks = new ConfigManager(Main.getInstance(), "sticks.yml");
+    ConfigManager shopSticks = new ConfigManager(Main.getInstance(), "shop.yml");
+
+    Economy econ = Main.getEconomy();
 
     @EventHandler
-    public void ClickItem(InventoryClickEvent event) {
-        if (event.getView().getTitle().equals(Translator.Colors("&9&lSticks &a&lShop"))) {
-            if (event.getCurrentItem() != null) {
-                Player player = (Player) event.getWhoClicked();
-                event.setCancelled(true);
+    public void ClickItem(InventoryClickEvent e) {
+        if (e.getView().getTitle().equals(Translator.Colors(shopSticks.getConfig().getString("Shop.title")))) {
+            if (e.getCurrentItem() != null) {
+                Player p = (Player) e.getWhoClicked();
+                e.setCancelled(true);
 
-                MessageManager message = new MessageManager(player);
+                MessageManager message = new MessageManager(p);
 
-                if (event.getSlot() == 11) {
-                    if (player.getInventory().firstEmpty() >= 0) {
-                        if (econ.getBalance(player) >= 500) {
-                            econ.withdrawPlayer(player, 500);
+                if (e.getSlot() == shopSticks.getConfig().getInt("Shop.items.fireballstick.position")) {
+                    if (p.getInventory().firstEmpty() >= 0) {
+                        if (econ.getBalance(p) >= shopSticks.getConfig().getInt("Shop.items.fireballstick.price")) {
+                            econ.withdrawPlayer(p, shopSticks.getConfig().getInt("Shop.items.fireballstick.price"));
                             message.buyFireballStick();
-                            player.getInventory().addItem(Sticks.getFireBallStick());
-                            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
+                            p.getInventory().addItem(Sticks.fireballstick());
+                            p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
                         } else {
                             message.noMoney();
                         }
@@ -37,13 +41,13 @@ public class SticksShopListener implements Listener {
                         message.invFull();
                     }
 
-                } else if (event.getSlot() == 12) {
-                    if (player.getInventory().firstEmpty() >= 0) {
-                        if (econ.getBalance(player) >= 650) {
-                            econ.withdrawPlayer(player, 650);
+                } else if (e.getSlot() == shopSticks.getConfig().getInt("Shop.items.witherstick.position")) {
+                    if (p.getInventory().firstEmpty() >= 0) {
+                        if (econ.getBalance(p) >= shopSticks.getConfig().getInt("Shop.items.witherstick.price")) {
+                            econ.withdrawPlayer(p, shopSticks.getConfig().getInt("Shop.items.witherstick.price"));
                             message.buyWitherStick();
-                            player.getInventory().addItem(Sticks.getWitherStick());
-                            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
+                            p.getInventory().addItem(Sticks.witherstick());
+                            p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
                         } else {
                             message.noMoney();
                         }
@@ -51,13 +55,13 @@ public class SticksShopListener implements Listener {
                         message.invFull();
                     }
 
-                } else if (event.getSlot() == 13) {
-                    if (player.getInventory().firstEmpty() >= 0) {
-                        if (econ.getBalance(player) >= 500) {
-                            econ.withdrawPlayer(player, 500);
+                } else if (e.getSlot() == shopSticks.getConfig().getInt("Shop.items.icestick.position")) {
+                    if (p.getInventory().firstEmpty() >= 0) {
+                        if (econ.getBalance(p) >= shopSticks.getConfig().getInt("Shop.items.icestick.price")) {
+                            econ.withdrawPlayer(p, shopSticks.getConfig().getInt("Shop.items.icestick.price"));
                             message.buyIceStick();
-                            player.getInventory().addItem(Sticks.getIceStick());
-                            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
+                            p.getInventory().addItem(Sticks.icestick());
+                            p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
                         } else {
                             message.noMoney();
                         }
@@ -65,13 +69,13 @@ public class SticksShopListener implements Listener {
                         message.invFull();
                     }
 
-                } else if (event.getSlot() == 14) {
-                    if (player.getInventory().firstEmpty() >= 0) {
-                        if (econ.getBalance(player) >= 750) {
-                            econ.withdrawPlayer(player, 750);
+                } else if (e.getSlot() == shopSticks.getConfig().getInt("Shop.items.electricstick.position")) {
+                    if (p.getInventory().firstEmpty() >= 0) {
+                        if (econ.getBalance(p) >= shopSticks.getConfig().getInt("Shop.items.electricstick.price")) {
+                            econ.withdrawPlayer(p, shopSticks.getConfig().getInt("Shop.items.electricstick.price"));
                             message.buyElectricStick();
-                            player.getInventory().addItem(Sticks.getElectricStick());
-                            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
+                            p.getInventory().addItem(Sticks.electricstick());
+                            p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
                         } else {
                             message.noMoney();
                         }
@@ -79,13 +83,13 @@ public class SticksShopListener implements Listener {
                         message.invFull();
                     }
 
-                } else if (event.getSlot() == 15) {
-                    if (player.getInventory().firstEmpty() >= 0) {
-                        if (econ.getBalance(player) >= 750) {
-                            econ.withdrawPlayer(player, 750);
+                } else if (e.getSlot() == shopSticks.getConfig().getInt("Shop.items.bridgestick.position")) {
+                    if (p.getInventory().firstEmpty() >= 0) {
+                        if (econ.getBalance(p) >= shopSticks.getConfig().getInt("Shop.items.bridgestick.price")) {
+                            econ.withdrawPlayer(p, shopSticks.getConfig().getInt("Shop.items.bridgestick.price"));
                             message.buyBridgeStick();
-                            player.getInventory().addItem(Sticks.getBridgeStick());
-                            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
+                            p.getInventory().addItem(Sticks.bridgestick());
+                            p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
                         } else {
                             message.noMoney();
                         }

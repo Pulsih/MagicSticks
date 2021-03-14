@@ -30,7 +30,7 @@ public class PowersInTheInventory implements Listener {
             if (f.getShooter() instanceof Player) {
                 Player shooter = (Player) event.getDamager();
                 String displayName = shooter.getInventory().getItemInMainHand().getItemMeta().getDisplayName();
-                if (displayName.equalsIgnoreCase(Sticks.getFireBallStick().getItemMeta().getDisplayName())) {
+                if (displayName.equalsIgnoreCase(Sticks.fireballstick().getItemMeta().getDisplayName())) {
                     event.setDamage(9.0);
                 }
             }

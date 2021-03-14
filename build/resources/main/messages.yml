@@ -2,53 +2,44 @@
 #                           >> MESSAGES <<                            #
 #######################################################################
 
+prefix: "&5&lMagic&9&lStick"
+
 #The message sent when you reload the Plugin
-# Default: "&5&lMagic&9&lStick &aHas been reloaded!"
-reload_message: "&5&lMagic&9&lStick &aHas been reloaded!"
+reload_message: "%prefix% &aPlugin reloaded!"
 
 #The message sent when you don't have the permission for a certain command
-# Default: "&c&l(!) &bYou don't have the permission!"
-nopermission_message: "&c&l(!) &bYou don't have the permission!"
+nopermission_message: "%prefix% &cYou don't have the permission!"
 
-#The message sent when you have not expired the cool down
-# Default: "&4&l(!) &6You have to wait &b%timeleft% &cSeconds&6!"
+#The message sent when you execute an Unknown command
+unknown_command: "%prefix% &cUnknown command!"
+
+
+#######################################################################
+#                            >> MANA <<                               #
+#######################################################################
+#The message sent when you have not expired the cool down | Placeholder: %timeleft%
 cooldown_message: "&4&l(!) &6You have to wait &b%timeleft% Seconds&6!"
 
 #The message sent when you activate your Power
-# Default: "&4&l(!) &6&lPower Activated!"
 power_activated_message: "&4&l(!) &6&lPower Activated!"
 
 #The message sent when you don't have enough Mana
-# Default: "&c&l(!) &7Insufficient &dMana&7!"
 insufficient_mana_message: "&c&l(!) &7Insufficient &dMana&7!"
 
-#The message sent when you select an Unknown Stick
-# Default: "&c&l(!) ERROR! &7Unknown stick, use /Stick give <stick>"
-unknown_stick_message: "&c&l(!) ERROR! &7Unknown stick, use /Stick give <stick>"
-
 #The message sent when you successfully buy something
-# Default: "&2&lSUCCESS! &aYou bought the "
 success_buy_message: "&2&lSUCCESS! &aYou bought the "
 
 #The message sent when you don't have enough Money
-# Default: "&c&l(!) &7Not enough money!"
 nomoney_message: "&c&l(!) &7Not enough money!"
 
 #The message sent when you don't have free slots in your Inventory
-# Default: "&c&l(!) &Inventory Full!"
 invfull_message: "&c&l(!) &Inventory Full!"
 
 #The message sent when you are charging your Mana
-# Default: "&7Charging..."
 charging_message: "&7Charging..."
 
 #The message sent when you have full Mana
-# Default: "&a20/20 Full &dMana&a!"
 fullmana_message: "&a20/20 Full &dMana&a!"
-
-#The message sent when you execute an Unknown command
-# Default: "&c&l(!) &7unknown command!"
-unknown_command: "&c&l(!) &7Unknown command!"
 
 
 #######################################################################
@@ -56,24 +47,22 @@ unknown_command: "&c&l(!) &7Unknown command!"
 #######################################################################
 
 #The message sent when you buy the Fireball Stick
-# Default: "&2&lSUCCESS! &aYou bought a &c&lFireBall &a&lStick&a!"
 buy_fireballstick_message: "&2&lSUCCESS! &aYou bought a &c&lFireBall &a&lStick&a!"
 
 #The message sent when you buy the Wither Stick
-# Default: "&2&lSUCCESS! &aYou bought a &8&lWither &3&lStick&a!"
 buy_witherstick_message: "&2&lSUCCESS! &aYou bought a &8&lWither &3&lStick&a!"
 
 #The message sent when you buy the Ice Stick
-# Default: "&2&lSUCCESS! &aYou bought a &9&lIce &3&lStick&a!"
 buy_icestick_message: "&2&lSUCCESS! &aYou bought a &9&lIce &3&lStick&a!"
 
 #The message sent when you buy the Electric Stick
-# Default: "&2&lSUCCESS! &aYou bought a &b&lE&3&ll&b&le&3&lc&b&lt&3&lr&b&li&3&lc &7&lStick&a!"
 buy_electricstick_message: "&2&lSUCCESS! &aYou bought a &b&lE&3&ll&b&le&3&lc&b&lt&3&lr&b&li&3&lc &7&lStick&a!"
 
 #The message sent when you buy the Bridge Stick
-# Default: ""&2&lSUCCESS! &aYou bought a &2&lB&6&lr&2&li&6&ld&2&lg&6&le &b&lStick&a!"
 buy_bridgestick_message: "&2&lSUCCESS! &aYou bought a &2&lB&6&lr&2&li&6&ld&2&lg&6&le &b&lStick&a!"
+
+#The message sent when you select an Unknown Stick
+unknown_stick_message: "&c&l(!) ERROR! &7Unknown stick, use /Stick give <stick>"
 
 
 #######################################################################
@@ -81,13 +70,10 @@ buy_bridgestick_message: "&2&lSUCCESS! &aYou bought a &2&lB&6&lr&2&li&6&ld&2&lg&
 #######################################################################
 
 #The message sent when you buy the Striker Power
-# Default: "&2&lSUCCESS! &aYou bought the &4&l&oSTRIKER &aPower!"
 buy_strikerpower_message: "&2&lSUCCESS! &aYou bought the &4&l&oSTRIKER &aPower!"
 
 #The message sent when you buy the Tank Power
-# Default: "&2&lSUCCESS! &aYou bought the &b&l&oTANK &aPower!"
 buy_tankpower_message: "&2&lSUCCESS! &aYou bought the &b&l&oTANK &aPower!"
 
 #The message sent when you buy the Furtivity Power
-# Default: "&2&lSUCCESS! &aYou bought the &5&l&oFURTIVITY &aPower!"
 buy_furtivitypower_message: "&2&lSUCCESS! &aYou bought the &5&l&oFURTIVITY &aPower!"

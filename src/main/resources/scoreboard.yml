@@ -4,27 +4,21 @@
 #                                                             #
 ###############################################################
 
-#Use or not the plugin Scoreboard
-#Default: true
-use_scoreboard: true
 
-#Set the update delay in Ticks (a delay of 0 could cause lag to the server)
-#Default: 40
-delay: 40
-
-#Here you can edit all line of you want! The limit of minecraft vanilla is 15 lines
-#Plugin placeholders: %power%, %points%, %kills%, %health%, %deaths%
+#Here you can edit all line of you want! The limit of minecraft is 15 lines
+#Plugin placeholders: %power%, %points%, %kills%, %health%, %deaths%, %mana%
 
 Scoreboard:
-  Title: "&5&lMagic&9&lSticks"
-  Lines:
+  title: "&5&lMagic&9&lSticks"
+  lines:
     - "&8&m----------------"
     - "&6&l&oINFO"
     - ""
-    - "Power: %power%"
-    - "Points: %points%"
     - "Kills: %kills%"
     - "Deaths: %deaths%"
-    - "Mana: %Mana%"
-    - "Health: %health%"
+    - "Mana: %player_exp%"
+    - "Health: %player_health%"
     - "&8&m----------------"
+
+  #Set the update delay in Ticks
+  delay: 40
