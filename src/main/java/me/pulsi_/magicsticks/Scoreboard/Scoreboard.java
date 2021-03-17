@@ -32,11 +32,6 @@ public class Scoreboard implements Listener {
         new BukkitRunnable() {
             public void run() {
                 updateBoard(board);
-
-                ListColorsTranslate color = new ListColorsTranslate();
-                color.colorBoard();
-
-                updateBoard(board);
             }
         }.runTaskTimer(Main.getInstance(), 0, Long.parseLong(delay));
     }
@@ -54,9 +49,7 @@ public class Scoreboard implements Listener {
             for (String list : scoreboard.getConfig().getStringList("Scoreboard.lines")) {
                 lines.add(ChatColor.translateAlternateColorCodes('&', list)
                         .replace("%kills%", ""+kills)
-                        .replace("%deaths%", ""+deaths)
-                        .replace("%health%", ""+health)
-                        .replace("%mana%", ""+mana));
+                        .replace("%deaths%", ""+deaths));
             }
 
             board.updateTitle(Translator.Colors(scoreboard.getConfig().getString("Scoreboard.title")));

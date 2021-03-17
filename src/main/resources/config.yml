@@ -1,6 +1,6 @@
 ################################################################
 #                                                              #
-#                      ] MagicSticks [                         #
+#                      < MagicSticks >                         #
 #                                                              #
 #                 Plugin created by Pulsi_                     #
 #                For help join my discord!                     #
@@ -11,15 +11,28 @@
 #Recive update messages if available
 update_checker: true
 
+
+################################################################
+#                      < Projectiles >                         #
+################################################################
+
+#This is really Important, chose this to change the type of shoot style,
+#by choosing <MANA>, you will use Experience for shoot cost, by choosing
+#<AMMO>, you will use physic ammo for shoot, by choosing <MONEY>, you will
+#use money for shoot
+shoot_selector: AMMO
+
+disable_fireball_explosion: true
+
+disable_witherskull_explosion: true
+
+
 ################################################################
 #                          < Mana >                            #
 ################################################################
 
-#If you will not choose the Mana, you will have to use < AMMO >
-use_mana: true
-
 #The delay for the Mana regeneration (in Ticks -> 20 = 1 Second)
-regeneration_delay: 20
+mana_delay: 20
 
 #The max amount of mana which a player can have
 max_mana: 20
@@ -27,8 +40,39 @@ max_mana: 20
 #The amount given to the player
 mana_given: 1
 
+
+################################################################
+#                          < Ammo >                            #
+################################################################
+
+#The amount given to the player
+bullets_gived_on_kill: 32
+
+
+################################################################
+#                          < Money >                            #
+################################################################
+
+#The delay for the Mana regeneration (in Ticks -> 20 = 1 Second)
+use_delay: true
+regeneration_delay: 20
+
+#The max amount of mana which a player can have
+shoot_cost: 200
+
+#The amount given to the player
+eco_gived_on_kill: 2400
+
+
 ################################################################
 #                       < Scoreboard >                         #
 ################################################################
 
 use_scoreboard: true
+
+
+################################################################
+#                        < Hearts >                            #
+################################################################
+
+drop_heart_on_player_kill:

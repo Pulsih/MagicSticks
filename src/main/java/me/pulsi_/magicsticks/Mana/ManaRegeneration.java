@@ -21,7 +21,7 @@ public class ManaRegeneration implements Listener {
 
     @EventHandler
     public void MoveMana(PlayerJoinEvent e) {
-        if (!Main.getInstance().getConfig().getBoolean("use_mana")) return;
+        if (!(Main.getInstance().getConfig().getString("shoot_selector").contains("MANA"))) return;
         Player player = e.getPlayer();
         new BukkitRunnable() {
             public void run() {

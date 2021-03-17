@@ -2,7 +2,6 @@ package me.pulsi_.magicsticks.Sticks;
 
 import me.pulsi_.magicsticks.Main;
 import me.pulsi_.magicsticks.Managers.ConfigManager;
-import me.pulsi_.magicsticks.Managers.MessageManager;
 import me.pulsi_.magicsticks.Managers.Translator;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Sound;
@@ -15,6 +14,7 @@ public class SticksShopListener implements Listener {
 
     ConfigManager configSticks = new ConfigManager(Main.getInstance(), "sticks.yml");
     ConfigManager shopSticks = new ConfigManager(Main.getInstance(), "shop.yml");
+    ConfigManager messages = new ConfigManager(Main.getInstance(), "messages.yml");
 
     Economy econ = Main.getEconomy();
 
@@ -25,76 +25,94 @@ public class SticksShopListener implements Listener {
                 Player p = (Player) e.getWhoClicked();
                 e.setCancelled(true);
 
-                MessageManager message = new MessageManager(p);
-
                 if (e.getSlot() == shopSticks.getConfig().getInt("Shop.items.fireballstick.position")) {
                     if (p.getInventory().firstEmpty() >= 0) {
                         if (econ.getBalance(p) >= shopSticks.getConfig().getInt("Shop.items.fireballstick.price")) {
                             econ.withdrawPlayer(p, shopSticks.getConfig().getInt("Shop.items.fireballstick.price"));
-                            message.buyFireballStick();
+                            p.sendMessage(Translator.Colors(messages.getConfig().getString("success_buy_message")
+                                    .replace("%item%", ""+configSticks.getConfig().getString("Sticks.fireballstick.name")
+                                    .replace("%prefix%" , messages.getConfig().getString("prefix")))));
                             p.getInventory().addItem(Sticks.fireballstick());
                             p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
                         } else {
-                            message.noMoney();
+                            p.sendMessage(Translator.Colors(messages.getConfig().getString("nomoney_message")
+                                    .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
                         }
                     } else {
-                        message.invFull();
+                        p.sendMessage(Translator.Colors(messages.getConfig().getString("invfull_message")
+                                .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
                     }
 
                 } else if (e.getSlot() == shopSticks.getConfig().getInt("Shop.items.witherstick.position")) {
                     if (p.getInventory().firstEmpty() >= 0) {
                         if (econ.getBalance(p) >= shopSticks.getConfig().getInt("Shop.items.witherstick.price")) {
                             econ.withdrawPlayer(p, shopSticks.getConfig().getInt("Shop.items.witherstick.price"));
-                            message.buyWitherStick();
+                            p.sendMessage(Translator.Colors(messages.getConfig().getString("success_buy_message")
+                                    .replace("%item%", ""+configSticks.getConfig().getString("Sticks.witherstick.name")
+                                    .replace("%prefix%" , messages.getConfig().getString("prefix")))));
                             p.getInventory().addItem(Sticks.witherstick());
                             p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
                         } else {
-                            message.noMoney();
+                            p.sendMessage(Translator.Colors(messages.getConfig().getString("nomoney_message")
+                                    .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
                         }
                     } else {
-                        message.invFull();
+                        p.sendMessage(Translator.Colors(messages.getConfig().getString("invfull_message")
+                                .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
                     }
 
                 } else if (e.getSlot() == shopSticks.getConfig().getInt("Shop.items.icestick.position")) {
                     if (p.getInventory().firstEmpty() >= 0) {
                         if (econ.getBalance(p) >= shopSticks.getConfig().getInt("Shop.items.icestick.price")) {
                             econ.withdrawPlayer(p, shopSticks.getConfig().getInt("Shop.items.icestick.price"));
-                            message.buyIceStick();
+                            p.sendMessage(Translator.Colors(messages.getConfig().getString("success_buy_message")
+                                    .replace("%item%", ""+ configSticks.getConfig().getString("Sticks.icestick.name")
+                                    .replace("%prefix%" , messages.getConfig().getString("prefix")))));
                             p.getInventory().addItem(Sticks.icestick());
                             p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
                         } else {
-                            message.noMoney();
+                            p.sendMessage(Translator.Colors(messages.getConfig().getString("nomoney_message")
+                                    .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
                         }
                     } else {
-                        message.invFull();
+                        p.sendMessage(Translator.Colors(messages.getConfig().getString("invfull_message")
+                                .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
                     }
 
                 } else if (e.getSlot() == shopSticks.getConfig().getInt("Shop.items.electricstick.position")) {
                     if (p.getInventory().firstEmpty() >= 0) {
                         if (econ.getBalance(p) >= shopSticks.getConfig().getInt("Shop.items.electricstick.price")) {
                             econ.withdrawPlayer(p, shopSticks.getConfig().getInt("Shop.items.electricstick.price"));
-                            message.buyElectricStick();
+                            p.sendMessage(Translator.Colors(messages.getConfig().getString("success_buy_message")
+                                    .replace("%item%", ""+ configSticks.getConfig().getString("Sticks.electricstick.name")
+                                    .replace("%prefix%" , messages.getConfig().getString("prefix")))));
                             p.getInventory().addItem(Sticks.electricstick());
                             p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
                         } else {
-                            message.noMoney();
+                            p.sendMessage(Translator.Colors(messages.getConfig().getString("nomoney_message")
+                                    .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
                         }
                     } else {
-                        message.invFull();
+                        p.sendMessage(Translator.Colors(messages.getConfig().getString("invfull_message")
+                                .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
                     }
 
                 } else if (e.getSlot() == shopSticks.getConfig().getInt("Shop.items.bridgestick.position")) {
                     if (p.getInventory().firstEmpty() >= 0) {
                         if (econ.getBalance(p) >= shopSticks.getConfig().getInt("Shop.items.bridgestick.price")) {
                             econ.withdrawPlayer(p, shopSticks.getConfig().getInt("Shop.items.bridgestick.price"));
-                            message.buyBridgeStick();
+                            p.sendMessage(Translator.Colors(messages.getConfig().getString("success_buy_message")
+                                    .replace("%item%", ""+ configSticks.getConfig().getString("Sticks.bridgestick.name")
+                                    .replace("%prefix%" , messages.getConfig().getString("prefix")))));
                             p.getInventory().addItem(Sticks.bridgestick());
                             p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 1);
                         } else {
-                            message.noMoney();
+                            p.sendMessage(Translator.Colors(messages.getConfig().getString("nomoney_message")
+                                    .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
                         }
                     } else {
-                        message.invFull();
+                        p.sendMessage(Translator.Colors(messages.getConfig().getString("invfull_message")
+                                .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
                     }
                 }
             }

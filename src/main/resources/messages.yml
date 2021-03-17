@@ -22,13 +22,22 @@ unknown_command: "%prefix% &cUnknown command!"
 cooldown_message: "%prefix% &7You have to wait &b%timeleft% Seconds&6!"
 
 #The message sent when you don't have enough Mana
-insufficient_mana_message: "%prefix% &7Insufficient &dMana&7!"
+insufficient_mana_message: "%prefix% &cInsufficient &dMana&c!"
 
 #The message sent when you are charging your Mana
 charging_message: "&7Charging..."
 
 #The message sent when you have full Mana
 fullmana_message: "&a20/20 Full &dMana&a!"
+
+
+#######################################################################
+#                            >> AMMO <<                               #
+#######################################################################
+
+insufficient_ammo_message: "%prefix% &cInsufficient &aAmmo&c!"
+
+ammo_usage: "%prefix% &cIncorrect usage! &aUse /MagicSticks ammo give <amount>"
 
 
 #######################################################################
@@ -41,16 +50,16 @@ nomoney_message: "%prefix% &cNot enough money!"
 #The message sent when you don't have free slots in your Inventory
 invfull_message: "%prefix% &cInventory Full!"
 
+#The message sent when you successfully buy something | Placeholder: %item%
+success_buy_message: "&2&lSUCCESS! &aYou bought the %item%!"
+
 
 #######################################################################
 #                          > > STICKS < <                             #
 #######################################################################
 
-#The message sent when you successfully buy something | Placeholder: %stick%
-success_buy_message: "&2&lSUCCESS! &aYou bought the %stick%!"
-
 #The message sent when you select an Unknown Stick
-unknown_stick_message: "&c&l(!) ERROR! &7Unknown stick, use /Stick give <stick>"
+unknown_stick_message: "&c&l(!) &7Unknown stick, use /Stick give <stick>"
 
 
 #######################################################################

@@ -5,6 +5,8 @@ api-version: 1.13
 prefix: < MagicSticks >
 load: POSTWORLD
 authors: [ Pulsi_ ]
+depend:
+  - Vault
 description: The funniest plugin of Spigot!
 commands:
   magicsticks:

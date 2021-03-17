@@ -41,4 +41,85 @@ public class AmmoItems {
         item.setItemMeta(meta);
         return item;
     }
+
+    public static ItemStack ammo64() {
+
+        ConfigManager ammo = new ConfigManager(Main.getInstance(), "ammo.yml");
+
+        ItemStack item = new ItemStack(Material.valueOf(ammo.getConfig().getString("Ammo.material")), 64);
+
+        ItemMeta meta = item.getItemMeta();
+
+        meta.setDisplayName(Translator.Colors(ammo.getConfig().getString("Ammo.name")));
+
+        if (ammo.getConfig().getBoolean("Ammo.use_lore")) {
+            List<String> lore = new ArrayList<String>();
+            for (String lines : ammo.getConfig().getStringList("Ammo.lore")) {
+                lore.add(ChatColor.translateAlternateColorCodes('&', lines));
+            }
+            meta.setLore(lore);
+        }
+
+        if (ammo.getConfig().getBoolean("Ammo.glowing")) {
+            meta.addEnchant(Enchantment.DURABILITY, 1, false);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    public static ItemStack ammo32() {
+
+        ConfigManager ammo = new ConfigManager(Main.getInstance(), "ammo.yml");
+
+        ItemStack item = new ItemStack(Material.valueOf(ammo.getConfig().getString("Ammo.material")), 32);
+
+        ItemMeta meta = item.getItemMeta();
+
+        meta.setDisplayName(Translator.Colors(ammo.getConfig().getString("Ammo.name")));
+
+        if (ammo.getConfig().getBoolean("Ammo.use_lore")) {
+            List<String> lore = new ArrayList<String>();
+            for (String lines : ammo.getConfig().getStringList("Ammo.lore")) {
+                lore.add(ChatColor.translateAlternateColorCodes('&', lines));
+            }
+            meta.setLore(lore);
+        }
+
+        if (ammo.getConfig().getBoolean("Ammo.glowing")) {
+            meta.addEnchant(Enchantment.DURABILITY, 1, false);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    public static ItemStack ammo16() {
+
+        ConfigManager ammo = new ConfigManager(Main.getInstance(), "ammo.yml");
+
+        ItemStack item = new ItemStack(Material.valueOf(ammo.getConfig().getString("Ammo.material")), 16);
+
+        ItemMeta meta = item.getItemMeta();
+
+        meta.setDisplayName(Translator.Colors(ammo.getConfig().getString("Ammo.name")));
+
+        if (ammo.getConfig().getBoolean("Ammo.use_lore")) {
+            List<String> lore = new ArrayList<String>();
+            for (String lines : ammo.getConfig().getStringList("Ammo.lore")) {
+                lore.add(ChatColor.translateAlternateColorCodes('&', lines));
+            }
+            meta.setLore(lore);
+        }
+
+        if (ammo.getConfig().getBoolean("Ammo.glowing")) {
+            meta.addEnchant(Enchantment.DURABILITY, 1, false);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+
+        item.setItemMeta(meta);
+        return item;
+    }
 }

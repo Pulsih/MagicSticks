@@ -2,7 +2,6 @@ package me.pulsi_.magicsticks.Powers;
 
 import me.pulsi_.magicsticks.Main;
 import me.pulsi_.magicsticks.Managers.ConfigManager;
-import me.pulsi_.magicsticks.Managers.MessageManager;
 import me.pulsi_.magicsticks.Managers.Translator;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -11,7 +10,6 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -29,41 +27,50 @@ public class PowersEffects implements Listener {
 
     @EventHandler
     public void Powers(PlayerInteractEvent e) {
-        Player player = e.getPlayer();
-        World world = player.getWorld();
-        if(!e.getAction().name().contains("RIGHT"))return;
-        if(!player.isSneaking()) return;
+        Player p = e.getPlayer();
+        World world = p.getWorld();
+        if (!(Main.getInstance().getConfig().getString("shoot_selector").contains("MANA"))) return;
+        if (!e.getAction().name().contains("RIGHT")) return;
+        if (!p.isSneaking()) return;
         ItemStack item = e.getItem();
 
-        //List all your custom power items here
-        if(item == null) return;
-        if(!(item.isSimilar(PowersItems.getTankPower()) || item.isSimilar(PowersItems.getStrikerPower()) || item.isSimilar(PowersItems.getFurtivityPower()))) return;
+        if (item == null) return;
+        if (!(item.isSimilar(PowersItems.tankItem()) || item.isSimilar(PowersItems.strikerItem()) || item.isSimilar(PowersItems.furtivityItem())))
+            return;
 
-        if(!this.cooldown.containsKey(player.getUniqueId()) || this.cooldown.get(player.getUniqueId()) <= System.currentTimeMillis()) {
-            this.cooldown.put(player.getUniqueId(), System.currentTimeMillis() + (5 * 60 * 1000));
+        if (!this.cooldown.containsKey(p.getUniqueId()) || this.cooldown.get(p.getUniqueId()) <= System.currentTimeMillis()) {
+            this.cooldown.put(p.getUniqueId(), System.currentTimeMillis() + (5 * 60 * 1000));
 
         } else {
-            String messageCooldown = messages.getConfig().getString("cooldown_message");
-            long timeleft = (this.cooldown.get(player.getUniqueId()) - System.currentTimeMillis());
-            player.sendMessage(Translator.Colors(messageCooldown.replace("%timeleft%", (timeleft / 1000) + "")));
+            String messageCooldown = messages.getConfig().getString("cooldown_message")
+                    .replace("%prefix%" , messages.getConfig().getString("prefix"));
+            long timeleft = (this.cooldown.get(p.getUniqueId()) - System.currentTimeMillis());
+            p.sendMessage(Translator.Colors(messageCooldown.replace("%timeleft%", (timeleft / 1000) + "")));
             return;
         }
 
-        MessageManager message = new MessageManager(player);
-
         //-------------------------------------------------------------------------------------------
         // Striker Power
-        if(item.isSimilar(PowersItems.getStrikerPower())) {
-            if(player.getLevel() >= 20) {
-                player.giveExpLevels(-20);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 400, 2));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 400, 4));
-                player.getWorld().strikeLightning(player.getLocation());
-                player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_AMBIENT, 5, 1);
-                message.powerActivated();
+        if (item.isSimilar(PowersItems.strikerItem())) {
+            if (p.getLevel() >= 20) {
+                p.giveExpLevels(-20);
+
+                if (p.getPotionEffect(PotionEffectType.SPEED) == null) {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 400, 2));
+                }
+
+                if (p.getPotionEffect(PotionEffectType.REGENERATION) == null) {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 400, 4));
+                }
+
+                p.getWorld().strikeLightning(p.getLocation());
+                p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_AMBIENT, 5, 1);
+                p.sendMessage(Translator.Colors(messages.getConfig().getString("power_activated_message")
+                        .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
             } else {
-                String noMana = messages.getConfig().getString("insufficient_mana_message");
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
+                String noMana = messages.getConfig().getString("insufficient_mana_message")
+                        .replace("%prefix%" , messages.getConfig().getString("prefix"));
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
             }
             // Striker Power
             //-------------------------------------------------------------------------------------------
@@ -71,19 +78,19 @@ public class PowersEffects implements Listener {
 
             //-------------------------------------------------------------------------------------------
             // Tank Power
-        }else if (item.isSimilar(PowersItems.getTankPower())) {
-            if (player.getLevel() >= 15) {
-                player.giveExpLevels(-15);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100, 255));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 400, 4));
-                world.createExplosion(player.getLocation(), 0);
-                player.playSound(player.getLocation(), Sound.ENTITY_CHICKEN_EGG, 15, 1);
-
-
-                message.powerActivated();
+        } else if (item.isSimilar(PowersItems.tankItem())) {
+            if (p.getLevel() >= 15) {
+                p.giveExpLevels(-15);
+                p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100, 255));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 400, 4));
+                world.createExplosion(p.getLocation(), 0);
+                p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 15, 1);
+                p.sendMessage(Translator.Colors(messages.getConfig().getString("power_activated_message")
+                        .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
             } else {
-                String noMana = Main.getInstance().getConfig().getString("insufficient_mana_message");
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
+                String noMana = Main.getInstance().getConfig().getString("insufficient_mana_message")
+                        .replace("%prefix%" , messages.getConfig().getString("prefix"));
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
             }
             // Tank Power
             //-------------------------------------------------------------------------------------------
@@ -91,30 +98,24 @@ public class PowersEffects implements Listener {
 
             //-------------------------------------------------------------------------------------------
             // Furtivity Power
-        } else if (item.isSimilar(PowersItems.getFurtivityPower())) {
-            if (player.getLevel() >= 20) {
-                player.giveExpLevels(-20);
-                player.setHealth(20);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 200, 1));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 400, 2));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 400, 2));
-                world.createExplosion(player.getLocation(), 0);
-                player.playSound(player.getLocation(), Sound.ENTITY_SILVERFISH_AMBIENT, 15, 1);
-                message.powerActivated();
+        } else if (item.isSimilar(PowersItems.furtivityItem())) {
+            if (p.getLevel() >= 20) {
+                p.giveExpLevels(-20);
+                p.setHealth(20);
+                p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 200, 1));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 400, 2));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 400, 2));
+                world.createExplosion(p.getLocation(), 0);
+                p.playSound(p.getLocation(), Sound.ENTITY_SILVERFISH_AMBIENT, 15, 1);
+                p.sendMessage(Translator.Colors(messages.getConfig().getString("power_activated_message")
+                        .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
             } else {
-                String noMana = Main.getInstance().getConfig().getString("insufficient_mana_message");
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
+                String noMana = Main.getInstance().getConfig().getString("insufficient_mana_message")
+                        .replace("%prefix%" , messages.getConfig().getString("prefix"));
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
             }
         }
         // Furtivity Power
         //-------------------------------------------------------------------------------------------
-    }
-
-    @EventHandler
-    public void onBlockPlace(BlockPlaceEvent e) {
-        ItemStack item = e.getItemInHand();
-        if (item.isSimilar(PowersItems.getTankPower())) {
-            e.setCancelled(true);
-        }
     }
 }

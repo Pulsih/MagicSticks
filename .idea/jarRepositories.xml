@@ -31,5 +31,10 @@
       <option name="name" value="maven" />
       <option name="url" value="https://jitpack.io" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="skullcreator-repo" />
+      <option name="name" value="skullcreator-repo" />
+      <option name="url" value="https://dl.bintray.com/deanveloper/SkullCreator" />
+    </remote-repository>
   </component>
 </project>

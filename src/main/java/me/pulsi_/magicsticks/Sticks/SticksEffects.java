@@ -29,7 +29,7 @@ public class SticksEffects implements Listener {
 
     @EventHandler
     public static void SticksPowers(PlayerInteractEvent e) {
-        if (!Main.getInstance().getConfig().getBoolean("use_mana")) return;
+        if (!(Main.getInstance().getConfig().getString("shoot_selector").contains("MANA"))) return;
         Player p = e.getPlayer();
         ItemStack item = e.getItem();
         if (item == null) return;
@@ -40,10 +40,10 @@ public class SticksEffects implements Listener {
         //-------------------------------------------------------------------------------------------
         // FireBall Power
         if (item.isSimilar(Sticks.fireballstick())) {
-            if (p.getLevel() >= configSticks.getConfig().getInt("Sticks.fireballstick.cost_mana")) {
+            if (p.getLevel() >= configSticks.getConfig().getInt("Sticks.fireballstick.cost")) {
                 Fireball fireball = e.getPlayer().launchProjectile(Fireball.class);
                 fireball.setVelocity(fireball.getDirection().multiply(20.0));
-                p.giveExpLevels(- + configSticks.getConfig().getInt("Sticks.fireballstick.cost_mana"));
+                p.giveExpLevels(- + configSticks.getConfig().getInt("Sticks.fireballstick.cost"));
                 p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_SHOOT, 2, 2);
             } else {
                 String noMana = messages.getConfig().getString("insufficient_mana_message");
@@ -55,10 +55,10 @@ public class SticksEffects implements Listener {
             //-------------------------------------------------------------------------------------------
             // Wither Power
         } else if (item.isSimilar(Sticks.witherstick())) {
-            if (p.getLevel() >= configSticks.getConfig().getInt("Sticks.witherstick.cost_mana")) {
+            if (p.getLevel() >= configSticks.getConfig().getInt("Sticks.witherstick.cost")) {
                 WitherSkull wither = e.getPlayer().launchProjectile(WitherSkull.class);
                 wither.setVelocity(wither.getDirection().multiply(20.0));
-                p.giveExpLevels(- + configSticks.getConfig().getInt("Sticks.witherstick.cost_mana"));
+                p.giveExpLevels(- + configSticks.getConfig().getInt("Sticks.witherstick.cost"));
                 p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SHOOT, 2, 2);
             } else {
                 String noMana = messages.getConfig().getString("insufficient_mana_message");
@@ -70,7 +70,7 @@ public class SticksEffects implements Listener {
             //-------------------------------------------------------------------------------------------
             // Electric Power
         } else if (item.isSimilar(Sticks.electricstick())) {
-            if (p.getLevel() >= configSticks.getConfig().getInt("Sticks.electricstick.cost_mana")) {
+            if (p.getLevel() >= configSticks.getConfig().getInt("Sticks.electricstick.cost")) {
                 p.getWorld().strikeLightning(p.getLocation().getDirection().toLocation(p.getWorld()));
                 p.playSound(p.getLocation(), Sound.BLOCK_STONE_BREAK, 2, 2);
             } else {
@@ -83,7 +83,7 @@ public class SticksEffects implements Listener {
             //-------------------------------------------------------------------------------------------
             // Ice Power
         } else if (item.isSimilar(Sticks.icestick())) {
-            if (p.getLevel() >= configSticks.getConfig().getInt("Sticks.icestick.cost_mana")) {
+            if (p.getLevel() >= configSticks.getConfig().getInt("Sticks.icestick.cost")) {
                 p.launchProjectile(Snowball.class);
                 p.playSound(p.getLocation(), Sound.BLOCK_GLASS_BREAK, 2, 2);
             } else {
@@ -96,8 +96,8 @@ public class SticksEffects implements Listener {
             //-------------------------------------------------------------------------------------------
             // Bridge Power
         } else if (item.isSimilar(Sticks.bridgestick())) {
-            if (p.getLevel() >= configSticks.getConfig().getInt("Sticks.bridgestick.cost_mana")) {
-                p.giveExpLevels(- + configSticks.getConfig().getInt("Sticks.bridgestick.cost_mana"));
+            if (p.getLevel() >= configSticks.getConfig().getInt("Sticks.bridgestick.cost")) {
+                p.giveExpLevels(- + configSticks.getConfig().getInt("Sticks.bridgestick.cost"));
                 p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 2, 1);
 
                 Location loc1 = p.getLocation().add(0, -1, 0);

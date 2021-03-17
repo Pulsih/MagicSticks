@@ -18,8 +18,9 @@ Sticks:
       - "&8"
       - "&8&m--------------------------"
     glowing: true
-    #In levels, the mana needed to shoot a projectile
-    cost_mana: 1
+    #This is based on what you chose in the config: for Mana this will Levels, etc..
+    cost: 1
+    damage: 6.0
 
   witherstick:
     material: STICK
@@ -32,7 +33,8 @@ Sticks:
       - "&8"
       - "&8&m--------------------------"
     glowing: true
-    cost_mana: 1
+    cost: 1
+    damage: 7.0
 
   icestick:
     material: STICK
@@ -45,7 +47,8 @@ Sticks:
       - "&8"
       - "&8&m--------------------------"
     glowing: true
-    cost_mana: 1
+    cost: 1
+    damage: 5.0
 
   electricstick:
     material: STICK
@@ -58,7 +61,8 @@ Sticks:
       - "&8"
       - "&8&m--------------------------"
     glowing: true
-    cost_mana: 2
+    cost: 2
+    damage: 6.0
 
   bridgestick:
     material: STICK
@@ -71,4 +75,5 @@ Sticks:
       - "&8"
       - "&8&m--------------------------"
     glowing: true
+    cost: 1
     cost_mana: 1

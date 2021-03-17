@@ -1,0 +1,116 @@
+#####################################################
+# +-----------------------------------------------+ #
+# |                  < POWERS >                   | #
+# +-----------------------------------------------+ #
+#####################################################
+
+Powers:
+
+  Striker:
+    material: FERMENTED_SPIDER_EYE
+    name: "&4&l&oSTRIKER &3&l(140+ Points)"
+    use_lore: true
+    lore:
+      - ""
+      - "&2&lVantages"
+      - "&8> &6Make your sticks deal more damage!"
+      - "&8> &6Makes you faster!"
+      - ""
+      - "&c&lDisadvantages"
+      - "&8> &4Less health"
+      - "&8> &4More vulnerable"
+      - ""
+      - "&6&l&nSUPER"
+      - ""
+      - "&8> &dShift+Right-Click &ato:"
+      - ""
+      - "&a- Give yourself &bRegeneration V &afor &b20 Seconds&a!"
+      - "&a- Give yourself &bSpeed III &afor &b20 Seconds"
+      - "&a- Shoot without using &dMana &afor &b20 Seconds"
+      - ""
+      - "&7Cost: &d20 Mana"
+      - "&7&o*Cool down: 300 Seconds*"
+    glowing: true
+    cooldown: 300
+    effects:
+      - SPEED, 20, 2
+      - REGENERATION, 20 , 4
+    custom_effects:
+      - FREE_MANA, 1, 20
+    passive_effects:
+      - MORE_DAMAGE
+      - SPEED
+      - LESS_HEALTH
+      - MORE_VULNERABILITY
+
+  Tank:
+    material: BEACON
+    name: "&4&l&oSTRIKER &3&l(140+ Points)"
+    use_lore: true
+    lore:
+      - ""
+      - "&2&lVantages"
+      - "&8> &6Make your sticks deal more damage!"
+      - "&8> &6Makes you faster!"
+      - ""
+      - "&c&lDisadvantages"
+      - "&8> &4Less health"
+      - "&8> &4More vulnerable"
+      - ""
+      - "&6&l&nSUPER"
+      - ""
+      - "&8> &dShift+Right-Click &ato:"
+      - ""
+      - "&a- Give yourself &bRegeneration V &afor &b20 Seconds&a!"
+      - "&a- Give yourself &bSpeed III &afor &b20 Seconds"
+      - "&a- Shoot without using &dMana &afor &b20 Seconds"
+      - ""
+      - "&7Cost: &d20 Mana"
+      - "&7&o*Cool down: 300 Seconds*"
+    glowing: true
+    cooldown: 300
+    effects:
+      - SPEED, 20, 2
+      - REGENERATION, 20 , 4
+    custom_effects:
+      - FREE_MANA, 1, 20
+    passive_effects:
+      - MORE_DAMAGE
+      - SPEED
+      - LESS_HEALTH
+      - MORE_VULNERABILITY
+
+  Furtivity:
+    material: FEATHER
+    name: "&5&l&oFURTIVITY &3&l(110+ Points)"
+    use_lore: true
+    lore:
+      - ""
+      - "&2&lVantages"
+      - "&8> &6Speed and Jump Increased!"
+      - ""
+      - "&c&lDisadvantages"
+      - "&8> &4Mana Regeneration more slow"
+      - ""
+      - "&6&l&nSUPER"
+      - ""
+      - "&8> &dShift+Right-Click &ato:"
+      - ""
+      - "&a- Becomes invisible to enemies for 10 Seconds"
+      - "&a- Heal yourself"
+      - "&a- Inflict +20% of damage while you are invisible"
+      - ""
+      - "&7Cost: &d20 Mana"
+      - "&7&o*Cool down: 300 Seconds*"
+    glowing: true
+    cooldown: 300
+    effects:
+      - SPEED, 20, 2
+      - REGENERATION, 20 , 4
+    custom_effects:
+      - FREE_MANA, 1, 20
+    passive_effects:
+      - MORE_DAMAGE
+      - SPEED
+      - LESS_HEALTH
+      - MORE_VULNERABILITY

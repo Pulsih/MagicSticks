@@ -6,7 +6,7 @@
 
 
 #Here you can edit all line of you want! The limit of minecraft is 15 lines
-#Plugin placeholders: %power%, %points%, %kills%, %health%, %deaths%, %mana%
+#Plugin placeholders: %kills%, %deaths%
 
 Scoreboard:
   title: "&5&lMagic&9&lSticks"
@@ -14,10 +14,10 @@ Scoreboard:
     - "&8&m----------------"
     - "&6&l&oINFO"
     - ""
-    - "Kills: %kills%"
-    - "Deaths: %deaths%"
-    - "Mana: %player_exp%"
-    - "Health: %player_health%"
+    - "Kills: &c%kills%"
+    - "Deaths: &4%deaths%"
+    - "Mana: 6a%player_exp%"
+    - "Health: 6d%player_health%"
     - "&8&m----------------"
 
   #Set the update delay in Ticks
