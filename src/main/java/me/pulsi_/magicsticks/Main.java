@@ -12,6 +12,9 @@ import me.pulsi_.magicsticks.KillsEvent.Players;
 import me.pulsi_.magicsticks.Mana.ManaRegeneration;
 import me.pulsi_.magicsticks.Managers.ConfigManager;
 import me.pulsi_.magicsticks.Managers.Translator;
+import me.pulsi_.magicsticks.MoneyMechanics.JoinMoney;
+import me.pulsi_.magicsticks.MoneyMechanics.MoneyPowersMechanics;
+import me.pulsi_.magicsticks.MoneyMechanics.MoneySticksMechanics;
 import me.pulsi_.magicsticks.Powers.PowersDrop;
 import me.pulsi_.magicsticks.Powers.PowersEffects;
 import me.pulsi_.magicsticks.Powers.PowersPickup;
@@ -30,7 +33,6 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
-
 
 public final class Main extends JavaPlugin implements Listener {
 
@@ -87,6 +89,10 @@ public final class Main extends JavaPlugin implements Listener {
         getCommand("magicsticks").setTabCompleter(new TabComplete());
 
         getServer().getPluginManager().registerEvents(new AbilitiesShopListener(), this);
+
+        getServer().getPluginManager().registerEvents(new JoinMoney(), this);
+        getServer().getPluginManager().registerEvents(new MoneyPowersMechanics(), this);
+        getServer().getPluginManager().registerEvents(new MoneySticksMechanics(), this);
 
         getServer().getPluginManager().registerEvents(new Players(), this);
         getServer().getPluginManager().registerEvents(new Mobs(), this);

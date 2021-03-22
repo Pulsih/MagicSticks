@@ -1,10 +1,12 @@
-package me.pulsi_.magicsticks.Powers;
+package me.pulsi_.magicsticks.MoneyMechanics;
 
 import me.pulsi_.magicsticks.Main;
 import me.pulsi_.magicsticks.Managers.ConfigManager;
 import me.pulsi_.magicsticks.Managers.Translator;
+import me.pulsi_.magicsticks.Powers.PowersItems;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -19,17 +21,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class PowersEffects implements Listener {
+public class MoneyPowersMechanics implements Listener {
 
     Map<UUID, Long> cooldown = new HashMap<>();
 
     ConfigManager messages = new ConfigManager(Main.getInstance(), "messages.yml");
+    ConfigManager powers = new ConfigManager(Main.getInstance(), "messages.yml");
+
+    Economy econ = Main.getEconomy();
 
     @EventHandler
-    public void Powers(PlayerInteractEvent e) {
+    public void MoneyPowers(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         World world = p.getWorld();
-        if (!(Main.getInstance().getConfig().getString("shoot_selector").contains("MANA"))) return;
+        if (!(Main.getInstance().getConfig().getString("shoot_selector").contains("MONEY"))) return;
         if (!e.getAction().name().contains("RIGHT")) return;
         if (!p.isSneaking()) return;
         ItemStack item = e.getItem();
@@ -52,18 +57,18 @@ public class PowersEffects implements Listener {
         //-------------------------------------------------------------------------------------------
         // Striker Power
         if (item.isSimilar(PowersItems.strikerItem())) {
-            if (p.getLevel() >= 20) {
-                p.giveExpLevels(-20);
+            if (econ.getBalance(p) >= powers.getConfig().getInt("Powers.Striker.cost")) {
+                econ.withdrawPlayer(p, powers.getConfig().getInt("Powers.Striker.cost"));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 400, 2));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 400, 4));
-                p.getWorld().strikeLightningEffect(p.getLocation());
+                p.getWorld().strikeLightning(p.getLocation());
                 p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_AMBIENT, 5, 1);
                 p.sendMessage(Translator.Colors(messages.getConfig().getString("power_activated_message")
                         .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
             } else {
-                String noMana = messages.getConfig().getString("insufficient_mana_message")
+                String noMoney = messages.getConfig().getString("insufficient_money_message")
                         .replace("%prefix%" , messages.getConfig().getString("prefix"));
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMoney)));
             }
             // Striker Power
             //-------------------------------------------------------------------------------------------
@@ -72,8 +77,8 @@ public class PowersEffects implements Listener {
             //-------------------------------------------------------------------------------------------
             // Tank Power
         } else if (item.isSimilar(PowersItems.tankItem())) {
-            if (p.getLevel() >= 15) {
-                p.giveExpLevels(-15);
+            if (econ.getBalance(p) >= powers.getConfig().getInt("Powers.Tank.cost")) {
+                econ.withdrawPlayer(p, powers.getConfig().getInt("Powers.Tank.cost"));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100, 255));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 400, 4));
                 world.createExplosion(p.getLocation(), 0);
@@ -81,9 +86,9 @@ public class PowersEffects implements Listener {
                 p.sendMessage(Translator.Colors(messages.getConfig().getString("power_activated_message")
                         .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
             } else {
-                String noMana = Main.getInstance().getConfig().getString("insufficient_mana_message")
+                String noMoney = Main.getInstance().getConfig().getString("insufficient_money_message")
                         .replace("%prefix%" , messages.getConfig().getString("prefix"));
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMoney)));
             }
             // Tank Power
             //-------------------------------------------------------------------------------------------
@@ -92,8 +97,8 @@ public class PowersEffects implements Listener {
             //-------------------------------------------------------------------------------------------
             // Furtivity Power
         } else if (item.isSimilar(PowersItems.furtivityItem())) {
-            if (p.getLevel() >= 20) {
-                p.giveExpLevels(-20);
+            if (econ.getBalance(p) >= powers.getConfig().getInt("Powers.Furtivity.cost")) {
+                econ.withdrawPlayer(p, powers.getConfig().getInt("Powers.Furtivity.cost"));
                 p.setHealth(20);
                 p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 200, 1));
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 400, 2));
@@ -103,9 +108,9 @@ public class PowersEffects implements Listener {
                 p.sendMessage(Translator.Colors(messages.getConfig().getString("power_activated_message")
                         .replace("%prefix%", ""+messages.getConfig().getString("prefix"))));
             } else {
-                String noMana = Main.getInstance().getConfig().getString("insufficient_mana_message")
+                String noMoney = Main.getInstance().getConfig().getString("insufficient_money_message")
                         .replace("%prefix%" , messages.getConfig().getString("prefix"));
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMoney)));
             }
         }
         // Furtivity Power

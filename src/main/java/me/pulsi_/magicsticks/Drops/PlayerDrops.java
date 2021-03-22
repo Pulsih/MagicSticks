@@ -1,4 +1,4 @@
-package me.pulsi_.magicsticks.Heads;
+package me.pulsi_.magicsticks.Drops;
 
 import me.pulsi_.magicsticks.Managers.Translator;
 import org.bukkit.Material;
@@ -6,14 +6,17 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
 
-public class PlayerHead {
+public class PlayerDrops {
 
-    public static ItemStack playerHead() {
+    public static ItemStack playerDrops() {
 
         ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+
+        SkullMeta skullMeta = (SkullMeta) head.getItemMeta();
 
         ItemMeta meta = head.getItemMeta();
 

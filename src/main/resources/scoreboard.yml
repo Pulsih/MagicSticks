@@ -16,8 +16,8 @@ Scoreboard:
     - ""
     - "Kills: &c%kills%"
     - "Deaths: &4%deaths%"
-    - "Mana: 6a%player_exp%"
-    - "Health: 6d%player_health%"
+    - "Mana: &a%player_exp%"
+    - "Health: &d%player_health%"
     - "&8&m----------------"
 
   #Set the update delay in Ticks

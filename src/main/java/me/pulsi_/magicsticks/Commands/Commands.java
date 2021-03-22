@@ -8,7 +8,6 @@ import me.pulsi_.magicsticks.Managers.Translator;
 import me.pulsi_.magicsticks.Powers.PowersShop;
 import me.pulsi_.magicsticks.Sticks.Sticks;
 import me.pulsi_.magicsticks.Sticks.SticksShop;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -236,21 +235,26 @@ public class Commands implements CommandExecutor {
 
 
             //---------------------------------------------------------------------------------------------------------
-            //                                      Ammo command
+            //                                        Ammo command
         } else if (args[0].equalsIgnoreCase("ammo")) {
             if (s instanceof Player) {
                 Player p = (Player) s;
                 if (p.hasPermission("magicsticks.ammo")) {
-                    if (Main.getInstance().getConfig().getBoolean("use_mana")) {
+                    if (!(Main.getInstance().getConfig().getString("shoot_selector").contains("AMMO"))) {
                         p.sendMessage(Translator.Colors("&c&l(!) &aThis command is disabled! Please turn the use_mana to false in the config to use this command!"));
 
                     } else if (args.length == 2 && args[0].equalsIgnoreCase("ammo") && args[1].equalsIgnoreCase("give")) {
                         p.getInventory().addItem(AmmoItems.ammo());
 
                     } else if (args.length == 3 && args[0].equalsIgnoreCase("ammo") && args[1].equalsIgnoreCase("give")) {
-                        int amount = Integer.parseInt(args[2]);
-                        ItemStack ammoItems = new ItemStack(Material.valueOf(String.valueOf(AmmoItems.ammo())), amount);
-                        p.getInventory().addItem(ammoItems);
+                        try {
+                            ItemStack ammoItems = AmmoItems.ammo();
+                            ammoItems.setAmount(Integer.parseInt(args[2]));
+                            p.getInventory().addItem(ammoItems);
+                        } catch (NumberFormatException e) {
+                            p.sendMessage(Translator.Colors(messages.getConfig().getString("no_number")
+                                    .replace("%prefix%",""+messages.getConfig().getString("prefix"))));
+                        }
 
                     } else {
                         p.sendMessage(Translator.Colors(messages.getConfig().getString("ammo_usage")
@@ -263,7 +267,7 @@ public class Commands implements CommandExecutor {
             } else {
                 s.sendMessage(Translator.Colors("&c&l(!) &fOnly Players can execute this command!"));
             }
-            //                                      Ammo command
+            //                                          Ammo command
             //---------------------------------------------------------------------------------------------------------
 
             //---------------------------------------------------------------------------------------------------------------

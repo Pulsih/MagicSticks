@@ -32,6 +32,8 @@ Powers:
       - "&7&o*Cool down: 300 Seconds*"
     glowing: true
     cooldown: 300
+    #This is based on what you chose in the config: for Mana this will Levels, etc..
+    cost: 20
     effects:
       - SPEED, 20, 2
       - REGENERATION, 20 , 4
@@ -69,6 +71,7 @@ Powers:
       - "&7&o*Cool down: 300 Seconds*"
     glowing: true
     cooldown: 300
+    cost: 20
     effects:
       - SPEED, 20, 2
       - REGENERATION, 20 , 4
@@ -104,6 +107,7 @@ Powers:
       - "&7&o*Cool down: 300 Seconds*"
     glowing: true
     cooldown: 300
+    cost: 20
     effects:
       - SPEED, 20, 2
       - REGENERATION, 20 , 4

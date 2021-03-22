@@ -14,35 +14,29 @@ Shop:
   #The items of the Shop
   #This items are the items created in the config: sticks.yml
   items:
-    fireballstick:
-      position: 11
+    'fireballstick':
+      slot: 11
       price: 600
 
-    witherstick:
-      position: 12
+    'witherstick':
+      slot: 12
       price: 700
 
-    icestick:
-      position: 13
+    'icestick':
+      slot: 13
       price: 300
 
-    electricstick:
-      position: 14
+    'electricstick':
+      slot: 14
       price: 800
 
-    bridgestick:
-      position: 15
+    'bridgestick':
+      slot: 15
       price: 800
 
-    #It show your balance
-    balance:
-      name: "&6&lYour Balance"
-      lore:
-        - ""
-        - "&7Money: &2%money%"
-      glowing: true
-      position: 26
-      use_balance_button: true
-
-  fill_air_slots: true
-  fill_material: WHITE_STAINED_GLASS_PANE
+fill_air_slots: true
+fill_material: WHITE_STAINED_GLASS_PANE
+name: "&6"
+use_lore: false
+lore:
+  - "Your Lore"

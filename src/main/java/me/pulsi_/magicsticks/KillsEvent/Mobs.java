@@ -1,6 +1,6 @@
 package me.pulsi_.magicsticks.KillsEvent;
 
-import me.pulsi_.magicsticks.Heads.MobHead;
+import me.pulsi_.magicsticks.Drops.MobDrop;
 import me.pulsi_.magicsticks.Sticks.Sticks;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,6 +19,6 @@ public class Mobs implements Listener {
         e.getEntity().getKiller().getInventory().getItemInMainHand().isSimilar(Sticks.icestick()) ||
         e.getEntity().getKiller().getInventory().getItemInMainHand().isSimilar(Sticks.electricstick()))) return;
 
-        e.getEntity().getLocation().getWorld().dropItemNaturally(e.getEntity().getLocation(), MobHead.mobHead());
+        e.getEntity().getLocation().getWorld().dropItemNaturally(e.getEntity().getLocation(), MobDrop.mobDrops());
     }
 }

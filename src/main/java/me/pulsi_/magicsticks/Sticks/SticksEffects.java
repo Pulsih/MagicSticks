@@ -71,8 +71,9 @@ public class SticksEffects implements Listener {
             // Electric Power
         } else if (item.isSimilar(Sticks.electricstick())) {
             if (p.getLevel() >= configSticks.getConfig().getInt("Sticks.electricstick.cost")) {
-                p.getWorld().strikeLightning(p.getLocation().getDirection().toLocation(p.getWorld()));
-                p.playSound(p.getLocation(), Sound.BLOCK_STONE_BREAK, 2, 2);
+                e.getPlayer().launchProjectile(Snowball.class);
+                p.playSound(p.getLocation(), Sound.BLOCK_STONE_BREAK, 5, 2);
+                p.giveExpLevels(- + configSticks.getConfig().getInt("Sticks.electricstick.cost"));
             } else {
                 String noMana = messages.getConfig().getString("insufficient_mana_message");
                 p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
@@ -86,6 +87,7 @@ public class SticksEffects implements Listener {
             if (p.getLevel() >= configSticks.getConfig().getInt("Sticks.icestick.cost")) {
                 p.launchProjectile(Snowball.class);
                 p.playSound(p.getLocation(), Sound.BLOCK_GLASS_BREAK, 2, 2);
+                p.giveExpLevels(- + configSticks.getConfig().getInt("Sticks.icestick.cost"));
             } else {
                 String noMana = messages.getConfig().getString("insufficient_mana_message");
                 p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));

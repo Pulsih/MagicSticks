@@ -1,4 +1,4 @@
-package me.pulsi_.magicsticks.Mana;
+package me.pulsi_.magicsticks.MoneyMechanics;
 
 import me.pulsi_.magicsticks.Main;
 import me.pulsi_.magicsticks.Managers.ConfigManager;
@@ -11,26 +11,26 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class ManaRegeneration implements Listener {
+public class JoinMoney implements Listener {
 
     ConfigManager messages = new ConfigManager(Main.getInstance(), "messages.yml");
 
-    String delay = Main.getInstance().getConfig().getString("mana_delay");
-    String maxMana = Main.getInstance().getConfig().getString("max_mana");
-    String expGiven = Main.getInstance().getConfig().getString("mana_given");
+    String delay = Main.getInstance().getConfig().getString("money_delay");
+    String maxMoney = Main.getInstance().getConfig().getString("max_money");
+    String moneyGiven = Main.getInstance().getConfig().getString("money_given");
 
     @EventHandler
-    public void MoveMana(PlayerJoinEvent e) {
-        if (!(Main.getInstance().getConfig().getString("shoot_selector").contains("MANA"))) return;
+    public void joinMoney(PlayerJoinEvent e) {
+        if (!(Main.getInstance().getConfig().getString("shoot_selector").contains("MONEY"))) return;
         Player player = e.getPlayer();
         new BukkitRunnable() {
             public void run() {
-                if (player.getLevel() < Long.parseLong(maxMana)) {
-                    player.giveExpLevels((int) Long.parseLong(expGiven));
-                    String charging = messages.getConfig().getString("charging_mana_message");
+                if (player.getLevel() < Long.parseLong(maxMoney)) {
+                    player.giveExpLevels((int) Long.parseLong(moneyGiven));
+                    String charging = messages.getConfig().getString("charging__money_message");
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(charging)));
                 } else {
-                    String fullMana = messages.getConfig().getString("fullmana_message");
+                    String fullMana = messages.getConfig().getString("fullmoney_message");
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(fullMana)));
                 }
             }

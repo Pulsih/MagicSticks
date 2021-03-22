@@ -53,15 +53,18 @@ bullets_gived_on_kill: 32
 #                          < Money >                            #
 ################################################################
 
-#The delay for the Mana regeneration (in Ticks -> 20 = 1 Second)
+#The delay for the Money regeneration (in Ticks -> 20 = 1 Second)
 use_delay: true
-regeneration_delay: 20
+money_delay: 20
+money_given: 150
 
 #The max amount of mana which a player can have
 shoot_cost: 200
 
-#The amount given to the player
+#The amount given to the player when he kill someone with a stick
 eco_gived_on_kill: 2400
+
+max_money: 5000
 
 
 ################################################################
@@ -72,7 +75,30 @@ use_scoreboard: true
 
 
 ################################################################
-#                        < Hearts >                            #
+#                      < Death Drops >                         #
 ################################################################
 
-drop_heart_on_player_kill:
+#Used for upgrade your skills
+drop_on_player_kill: true
+
+#Drop the mob head and use it to increase your skills
+drop_on_mob_kill: true
+
+#See the config files for more info about custom drops
+
+################################################################
+#                        < Powers >                            #
+################################################################
+
+disable_power_drop: true
+
+disable_more_powers_pickup: true
+
+
+################################################################
+#                        < Sticks >                            #
+################################################################
+
+disable_stick_drop: true
+
+disable_more_sticks_pickup: true

@@ -1,4 +1,4 @@
-package me.pulsi_.magicsticks.Ammos;
+package me.pulsi_.magicsticks.MoneyMechanics;
 
 import me.pulsi_.magicsticks.Main;
 import me.pulsi_.magicsticks.Managers.ConfigManager;
@@ -6,6 +6,7 @@ import me.pulsi_.magicsticks.Managers.Translator;
 import me.pulsi_.magicsticks.Sticks.Sticks;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -28,30 +29,30 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Arrays;
 import java.util.List;
 
-public class AmmoSticksMechanics implements Listener {
+public class MoneySticksMechanics implements Listener {
 
     @EventHandler
     public static void SticksPowers(PlayerInteractEvent e) {
-        if (!(Main.getInstance().getConfig().getString("shoot_selector").contains("AMMO"))) return;
+        if (!(Main.getInstance().getConfig().getString("shoot_selector").contains("MONEY"))) return;
         Player p = e.getPlayer();
         ItemStack item = e.getItem();
         if (item == null) return;
 
         ConfigManager configSticks = new ConfigManager(Main.getInstance(), "sticks.yml");
         ConfigManager messages = new ConfigManager(Main.getInstance(), "messages.yml");
+        Economy econ = Main.getEconomy();
 
         //-------------------------------------------------------------------------------------------
         // FireBall Power
         if (item.isSimilar(Sticks.fireballstick())) {
-            if (p.getInventory().containsAtLeast(AmmoItems.ammo(), 1)) {
+            if (econ.getBalance(p) >= configSticks.getConfig().getInt("Sticks.fireballstick.cost")) {
+                econ.withdrawPlayer(p, configSticks.getConfig().getInt("Sticks.fireballstick.cost"));
                 Fireball fireball = e.getPlayer().launchProjectile(Fireball.class);
                 fireball.setVelocity(fireball.getDirection().multiply(20.0));
-                p.getInventory().removeItem(AmmoItems.ammo());
                 p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_SHOOT, 2, 2);
             } else {
-                String noAmmo = messages.getConfig().getString("insufficient_ammo_message")
-                        .replace("%prefix%" , messages.getConfig().getString("prefix"));
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noAmmo)));
+                String noMana = messages.getConfig().getString("insufficient_mana_message");
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
             }
             // FireBall Power
             //-------------------------------------------------------------------------------------------
@@ -59,15 +60,14 @@ public class AmmoSticksMechanics implements Listener {
             //-------------------------------------------------------------------------------------------
             // Wither Power
         } else if (item.isSimilar(Sticks.witherstick())) {
-            if (p.getInventory().containsAtLeast(AmmoItems.ammo(), 1)) {
+            if (econ.getBalance(p) >= configSticks.getConfig().getInt("Sticks.witherstick.cost")) {
+                econ.withdrawPlayer(p, configSticks.getConfig().getInt("Sticks.witherstick.cost"));
                 WitherSkull wither = e.getPlayer().launchProjectile(WitherSkull.class);
                 wither.setVelocity(wither.getDirection().multiply(20.0));
-                p.getInventory().removeItem(AmmoItems.ammo());
                 p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SHOOT, 2, 2);
             } else {
-                String noAmmo = messages.getConfig().getString("insufficient_ammo_message")
-                        .replace("%prefix%" , messages.getConfig().getString("prefix"));
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noAmmo)));
+                String noMana = messages.getConfig().getString("insufficient_mana_message");
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
             }
             // Wither Power
             //-------------------------------------------------------------------------------------------
@@ -75,14 +75,13 @@ public class AmmoSticksMechanics implements Listener {
             //-------------------------------------------------------------------------------------------
             // Electric Power
         } else if (item.isSimilar(Sticks.electricstick())) {
-            if (p.getInventory().containsAtLeast(AmmoItems.ammo(), 1)) {
-                p.getInventory().removeItem(AmmoItems.ammo());
+            if (econ.getBalance(p) >= configSticks.getConfig().getInt("Sticks.icestick.cost")) {
+                econ.withdrawPlayer(p, configSticks.getConfig().getInt("Sticks.icestick.cost"));
                 e.getPlayer().launchProjectile(Snowball.class);
                 p.playSound(p.getLocation(), Sound.BLOCK_STONE_BREAK, 5, 2);
             } else {
-                String noAmmo = messages.getConfig().getString("insufficient_ammo_message")
-                        .replace("%prefix%" , messages.getConfig().getString("prefix"));
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noAmmo)));
+                String noMana = messages.getConfig().getString("insufficient_mana_message");
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
             }
             // Electric Power
             //-------------------------------------------------------------------------------------------
@@ -90,14 +89,13 @@ public class AmmoSticksMechanics implements Listener {
             //-------------------------------------------------------------------------------------------
             // Ice Power
         } else if (item.isSimilar(Sticks.icestick())) {
-            if (p.getInventory().containsAtLeast(AmmoItems.ammo(), 1)) {
-                p.getInventory().removeItem(AmmoItems.ammo());
+            if (econ.getBalance(p) >= configSticks.getConfig().getInt("Sticks.electricstick.cost")) {
+                econ.withdrawPlayer(p, configSticks.getConfig().getInt("Sticks.electricstick.cost"));
                 p.launchProjectile(Snowball.class);
                 p.playSound(p.getLocation(), Sound.BLOCK_GLASS_BREAK, 2, 2);
             } else {
-                String noAmmo = messages.getConfig().getString("insufficient_ammo_message")
-                        .replace("%prefix%" , messages.getConfig().getString("prefix"));
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noAmmo)));
+                String noMana = messages.getConfig().getString("insufficient_mana_message");
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
             }
             // Ice Power
             //-------------------------------------------------------------------------------------------
@@ -105,8 +103,8 @@ public class AmmoSticksMechanics implements Listener {
             //-------------------------------------------------------------------------------------------
             // Bridge Power
         } else if (item.isSimilar(Sticks.bridgestick())) {
-            if (p.getInventory().containsAtLeast(AmmoItems.ammo(), 1)) {
-                p.getInventory().removeItem(AmmoItems.ammo());
+            if (econ.getBalance(p) >= configSticks.getConfig().getInt("Sticks.bridgestick.cost")) {
+                econ.withdrawPlayer(p, configSticks.getConfig().getInt("Sticks.bridgestick.cost"));
                 p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 2, 1);
 
                 Location loc1 = p.getLocation().add(0, -1, 0);
@@ -135,10 +133,17 @@ public class AmmoSticksMechanics implements Listener {
                 // Bridge Power
                 //-------------------------------------------------------------------------------------------
             } else {
-                String noAmmo = messages.getConfig().getString("insufficient_ammo_message")
-                        .replace("%prefix%" , messages.getConfig().getString("prefix"));
-                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noAmmo)));
+                String noMana = messages.getConfig().getString("insufficient_mana_message");
+                p.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(Translator.Colors(noMana)));
             }
         }
+    }
+
+    @EventHandler
+    public static void icePower(EntityDamageByEntityEvent e) {
+        if (!(e.getCause() == EntityDamageEvent.DamageCause.PROJECTILE)) return;
+        if (!(e.getCause().equals(Snowball.class))) return;
+        if (!(e.getDamager() instanceof Player)) return;
+        ((Player) e.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 400, 2));
     }
 }

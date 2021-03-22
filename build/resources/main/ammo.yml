@@ -5,7 +5,6 @@
 #####################################################
 
 Ammo:
-
   material: GHAST_TEAR
   name: "&4&l&oAMMO"
   use_lore: true

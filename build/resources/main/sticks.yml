@@ -7,7 +7,7 @@
 #All powers available: 'fireball', 'wither', 'ice', 'electric', 'bridge'
 Sticks:
 
-  fireballstick:
+  'fireballstick':
     material: STICK
     name: "&c&lFireBall &a&lStick"
     lore:
@@ -18,11 +18,11 @@ Sticks:
       - "&8"
       - "&8&m--------------------------"
     glowing: true
-    #In levels, the mana needed to shoot a projectile
+    #This is based on what you chose in the config: for Mana this will be Levels, etc..
     cost: 1
     damage: 6.0
 
-  witherstick:
+  'witherstick':
     material: STICK
     name: "&8&lWither &3&lStick"
     lore:
@@ -33,11 +33,10 @@ Sticks:
       - "&8"
       - "&8&m--------------------------"
     glowing: true
-    #This is based on what you chose in the config:
     cost: 1
     damage: 7.0
 
-  icestick:
+  'icestick':
     material: STICK
     name: "&9&lIce &b&lStick"
     lore:
@@ -51,7 +50,7 @@ Sticks:
     cost: 1
     damage: 5.0
 
-  electricstick:
+  'electricstick':
     material: STICK
     name: "&b&lE&3&ll&b&le&3&lc&b&lt&3&lr&b&li&3&lc &7&lStick"
     lore:
@@ -65,7 +64,7 @@ Sticks:
     cost: 2
     damage: 6.0
 
-  bridgestick:
+  'bridgestick':
     material: STICK
     name: "&2&lB&6&lr&2&li&6&ld&2&lg&6&le &b&lStick"
     lore:
